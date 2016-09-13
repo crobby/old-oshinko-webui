@@ -25,8 +25,10 @@ module.controller('ClusterCtrl', [
     'clusterActions',
     "ListingState",
     "errorHandling",
-    function($scope, $interval, $location, $route, clusterDataFactory, sendNotifications, clusterActions, ListingState) {
+    'extensionRegistry',
+    function($scope, $interval, $location, $route, clusterDataFactory, sendNotifications, clusterActions, ListingState, errorHandling, extensionRegistry) {
         var cluster_id = $route.current.params.Id || '';
+        $scope.args = {"list": [1,2,3,4,5,77]};
         $scope.predicate = 'name';
         $scope.reverse = false;
         angular.extend($scope, clusterActions);
@@ -82,6 +84,12 @@ module.controller('ClusterCtrl', [
         });
 
         $scope.reloadData();
+        
+        // Adding a type will register the template string with the $templateCache
+        // and allow the directive to know how to deal with the new option, if it
+        // set in the extension-type attribute:
+        //  <extension-point extension-type="text <new-type>"
+        extensionRegistry.addType('li', '<li>{{item.text}}</li>');
     }
 ]);
 

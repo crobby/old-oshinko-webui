@@ -139,6 +139,11 @@ module.factory('clusterDataFactory', function($rootScope, $http, sendNotificatio
         var result = $http.put(urlBase + '/clusters/' + id, jsonData);
         return result;
     };
+
+    dataFactory.getJobs = function() {
+        return $http.get(urlBase + "/jobs");
+    };
+    
     return dataFactory;
 });
 

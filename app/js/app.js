@@ -12,7 +12,8 @@ var app = angular.module('Oshinko', [
     'ngCookies',
     'ngRoute',
     'Oshinko.controllers',
-    'Oshinko.factories'
+    'Oshinko.factories',
+    'extension-registry'
 ]);
 
 app.run(['$rootScope', '$http', function ($rootScope, $http) {

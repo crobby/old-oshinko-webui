@@ -129,6 +129,14 @@ app.delete('/api/clusters/:id', function(request, response) {
     fetchResponse(request, response, options, null);
 });
 
+app.get('/api/jobs', function(request, response) {
+    var child_process = require('child_process');
+    var output = child_process.execSync('oc get jobs --no-headers --output json');
+    oshinko_web_debug && console.log("Fecthing jobs.");
+    response.write(output);
+    response.send();
+});
+
 app.get('/oshinko-rest-location', function(request, response) {
     response.send(oshinko_rest_location)
 });
